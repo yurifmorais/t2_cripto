@@ -4,11 +4,8 @@ import java.math.BigInteger;
 import java.util.Base64;
 
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
 
 //(use vetores char ou int): em java eu utilizei vetor de byte pq ai ja converte direto
-
-
 public class Main{
     public static void main(String[] args) throws DecoderException {
         //parte 1
@@ -23,7 +20,8 @@ public class Main{
         xorCipher(plaintextHex, keyHex);
 
         //parte 3
-
+        String ciphertextHex = "4a61717565616e6f697465666f696c6f6e67616c6f6e67616c6f6e67616c6f6e6761";
+        xorDecipher(ciphertextHex, keyHex);
     }
 
     public static void hexParaBase64(String hex) {
@@ -66,5 +64,28 @@ public class Main{
     }
 
     //parte 3
+    public static void xorDecipher(String ciphertextHex, String keyHex) {
+        // Converte os valores em hexadecimal para vetores de bytes
+        byte[] ciphertext = new BigInteger(ciphertextHex, 16).toByteArray();
+        byte[] key = new BigInteger(keyHex, 16).toByteArray();
 
+        // Verifica se os vetores têm o mesmo tamanho
+        if (ciphertext.length != key.length) {
+            throw new IllegalArgumentException("Os vetores devem ter o mesmo tamanho");
+        }
+
+        // Cria um novo vetor para armazenar o resultado da decifra
+        byte[] plaintext = new byte[ciphertext.length];
+
+        // Realiza a decifra XOR bit-a-bit entre o ciphertext e a chave
+        for (int i = 0; i < ciphertext.length; i++) {
+            plaintext[i] = (byte) (ciphertext[i] ^ key[i]);
+        }
+
+        // Converte o resultado da decifra para hexadecimal
+        String plaintextHex = String.format("%040x", new BigInteger(1, plaintext));
+
+        // Imprime o resultado da decifra em hexadecimal
+        System.out.printf("\nXOR Decipher: %s", plaintextHex);
+    }
 }

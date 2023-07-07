@@ -8,14 +8,6 @@
     <artifactId>t2_cripto</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
-        </dependency>
-    </dependencies>
-
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
